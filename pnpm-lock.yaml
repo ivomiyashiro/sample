@@ -181,6 +181,19 @@ importers:
         specifier: ^2.1.8
         version: 2.1.9(@types/node@22.15.21)(@vitest/ui@2.1.9)(jsdom@26.1.0)(terser@5.39.2)
 
+  packages/shared:
+    dependencies:
+      zod:
+        specifier: ^3.22.4
+        version: 3.25.28
+    devDependencies:
+      rimraf:
+        specifier: ^6.0.0
+        version: 6.0.1
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
 packages:
   '@adobe/css-tools@4.4.3':
     resolution:
@@ -6553,6 +6566,14 @@ packages:
         integrity: sha512-q1b3N5QkRUWUl7iyylaaj3kOpIT0N2i9MqIEQXP73GVsN9cw3fdx8X63cEmWhJGi2PPCF23Ijp7ktmd39rawIA==,
       }
 
+  rimraf@6.0.1:
+    resolution:
+      {
+        integrity: sha512-9dkvaxAsk/xNXSJzMgFqqMCuFgt2+KsOFek3TMLfo8NCPfWpBmqwyNn5Y+NX56QUYfCtsyhF3ayiboEoUmJk/A==,
+      }
+    engines: { node: 20 || >=22 }
+    hasBin: true
+
   rollup@4.41.1:
     resolution:
       {
@@ -7861,6 +7882,12 @@ packages:
         integrity: sha512-cYVsTjKl8b+FrnidjibDWskAv7UKOfcwaVZdp/it9n1s9fU3IkgDbhdIRKCW4JDsAlECJY0ytoVPT3sK6kideA==,
       }
     engines: { node: '>=18' }
+
+  zod@3.25.28:
+    resolution:
+      {
+        integrity: sha512-/nt/67WYKnr5by3YS7LroZJbtcCBurDKKPBPWWzaxvVCGuG/NOsiKkrjoOhI8mJ+SQUXEbUzeB3S+6XDUEEj7Q==,
+      }
 
 snapshots:
   '@adobe/css-tools@4.4.3': {}
@@ -11866,6 +11893,11 @@ snapshots:
 
   rfdc@1.4.1: {}
 
+  rimraf@6.0.1:
+    dependencies:
+      glob: 11.0.1
+      package-json-from-dist: 1.0.1
+
   rollup@4.41.1:
     dependencies:
       '@types/estree': 1.0.7
@@ -12658,3 +12690,5 @@ snapshots:
   yocto-queue@1.2.1: {}
 
   yoctocolors-cjs@2.1.2: {}
+
+  zod@3.25.28: {}
