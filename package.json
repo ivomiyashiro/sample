@@ -1,10 +1,10 @@
 {
-  "name": "sample",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@sample/monorepo",
+  "version": "0.0.1",
+  "description": "Sample monorepo for a web application",
   "scripts": {
-    "dev": "concurrently \"pnpm dev:api\" \"pnpm dev:web\" --names \"API,WEB\" --prefix-colors \"blue,green\"",
+    "dev": "concurrently \"pnpm dev:shared\" \"pnpm dev:api\" \"pnpm dev:web\" --names \"SHARED,API,WEB\" --prefix-colors \"yellow,blue,green\"",
+    "dev:shared": "pnpm --filter @sample/shared run dev",
     "dev:api": "pnpm --filter api run start:dev",
     "dev:web": "pnpm --filter web run dev",
     "build": "pnpm build:shared && pnpm build:api & pnpm build:web",
