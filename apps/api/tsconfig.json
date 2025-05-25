@@ -9,6 +9,9 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "incremental": true,
     "noEmit": false,
     "verbatimModuleSyntax": false,
