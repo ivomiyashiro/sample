@@ -1,0 +1,8 @@
+model Sample {
+  sampleId        String   @id @default(uuid()) @map("sample_id")
+  name      String @unique
+  description String?
+  imageUrl    String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
