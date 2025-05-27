@@ -14,17 +14,19 @@
     "db:generate": "prisma generate --schema=src/core/database/schema.prisma",
     "db:migrate": "prisma migrate dev --schema=src/core/database/schema.prisma",
     "db:push": "prisma db push --schema=src/core/database/schema.prisma",
-    "db:setup": "pnpm db:schema:build && pnpm db:migrate && pnpm db:generate",
-    "db:schema:build": "ts-node src/shared/scripts/build-schema.ts",
+    "db:setup": "pnpm db:migrate && pnpm db:generate",
     "db:studio": "prisma studio --schema=src/core/database/schema.prisma",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "format": "prettier --write \"{src,apps,libs,test}/**/*.{ts,js,json,md,yml,yaml}\" && prisma format --schema=src/core/database/schema.prisma"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/client": "^6.8.2",
     "@sample/shared": "workspace:^",
+    "@supabase/supabase-js": "^2.49.8",
     "prisma": "^6.8.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",

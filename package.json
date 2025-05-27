@@ -28,13 +28,13 @@
     "packages/shared/**/*.{ts,js}": [
       "prettier --write"
     ],
-    "apps/api/**/*.{ts,js}": [
+    "apps/api/**/*.{ts,js,prisma}": [
       "pnpm lint:api",
-      "prettier --write"
+      "pnpm format"
     ],
     "apps/web/**/*.{ts,tsx,js,jsx}": [
       "pnpm lint:web",
-      "prettier --write"
+      "pnpm format"
     ],
     "*.{json,md,yml,yaml}": [
       "prettier --write"
