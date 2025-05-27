@@ -3,18 +3,18 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
 model Sample {
-  sampleId        String   @id @default(uuid()) @map("sample_id")
-  name      String @unique @db.VarChar(255)
-  description String? @db.VarChar(1024)
-  imageUrl    String? @db.Text @map("image_url")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  sampleId    String   @id @default(uuid()) @map("sample_id")
+  name        String   @unique @db.VarChar(255)
+  description String?  @db.VarChar(1024)
+  imageUrl    String?  @map("image_url") @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("samples")
 }
