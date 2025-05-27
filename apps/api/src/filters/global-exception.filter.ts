@@ -10,15 +10,6 @@ import { ErrorDetails, ErrorResponse } from '@sample/shared';
 import { Request, Response } from 'express';
 
 /**
- * Configuration for sensitive data redaction
- */
-const SENSITIVE_CONFIG = {
-  headers: ['authorization', 'cookie', 'x-api-key', 'x-auth-token'],
-  bodyFields: ['password', 'token', 'secret', 'key', 'auth'],
-  redactedValue: '[REDACTED]',
-} as const;
-
-/**
  * Processed exception information
  */
 interface ProcessedExceptionInfo {
@@ -255,43 +246,5 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     } catch {
       return String(obj);
     }
-  }
-
-  /**
-   * Remove sensitive information from request headers
-   */
-  private sanitizeHeaders(
-    headers: Record<string, unknown>,
-  ): Record<string, unknown> {
-    const sanitized = { ...headers };
-
-    SENSITIVE_CONFIG.headers.forEach((header) => {
-      if (sanitized[header]) {
-        sanitized[header] = SENSITIVE_CONFIG.redactedValue;
-      }
-    });
-
-    return sanitized;
-  }
-
-  /**
-   * Remove sensitive information from request body
-   */
-  private sanitizeBody(body: unknown): unknown {
-    if (!body || typeof body !== 'object') {
-      return body;
-    }
-
-    const sanitized = { ...(body as Record<string, unknown>) };
-
-    SENSITIVE_CONFIG.bodyFields.forEach((field) => {
-      Object.keys(sanitized).forEach((key) => {
-        if (key.toLowerCase().includes(field)) {
-          sanitized[key] = SENSITIVE_CONFIG.redactedValue;
-        }
-      });
-    });
-
-    return sanitized;
   }
 }

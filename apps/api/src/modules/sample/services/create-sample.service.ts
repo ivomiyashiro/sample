@@ -1,9 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { CreateSampleDTO } from '@sample/shared';
 
-import { Result } from '@/shared/abstractions';
-import { AppHttpError } from '@/shared/utils';
-import { DatabaseService } from '@/core/database/database.module';
+import { AppHttpError, Result } from '@/utils';
+import { DatabaseService } from '@/database/database.module';
 
 import { SampleDTO } from '../dtos';
 import { createSampleValidator } from '../validators';

@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { config } from './core/config';
-import { GlobalExceptionFilter } from './core/filters';
-import { HttpGlobalInterceptor } from './core/interceptors';
+import { config } from './config';
+import { GlobalExceptionFilter } from './filters';
+import { HttpGlobalInterceptor } from './interceptors';
 import { AppModule } from './app.module';
 
 async function bootstrap() {

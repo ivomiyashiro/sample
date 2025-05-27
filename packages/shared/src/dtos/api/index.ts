@@ -29,3 +29,17 @@ export interface ErrorResponse extends BaseResponse {
 export interface SuccessResponse<T> extends BaseResponse {
   data?: T;
 }
+
+/**
+ * Paginated response format
+ */
+export interface PaginatedResponse<T> extends SuccessResponse<T> {
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    pageSize: number;
+    hasNext: boolean;
+    hasPrevious: boolean;
+  };
+}

@@ -6,11 +6,11 @@ import {
   Param,
   Put,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CreateSampleDTO, UpdateSampleDTO } from '@sample/shared';
 
-import { AppHttpError, AppHttpException } from '@/shared/utils';
-import { ResultVoid } from '@/shared/abstractions';
+import { AppHttpError, AppHttpException, ResultVoid } from '@/utils';
 
 import {
   CreateSampleService,
@@ -19,7 +19,8 @@ import {
   DeleteSampleService,
   UpdateSampleService,
 } from '../services';
-import { SampleDTO } from '../dtos';
+
+import { SampleDTO, PaginatedSampleDTO } from '../dtos';
 
 @Controller('samples')
 export class SampleController {
@@ -44,8 +45,18 @@ export class SampleController {
   }
 
   @Get()
-  async getSamples(): Promise<SampleDTO[]> {
-    return this.getSamplesService.handle();
+  async getSamples(
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+    @Query('sortBy') sortBy?: string,
+    @Query('sortOrder') sortOrder?: 'asc' | 'desc',
+  ): Promise<PaginatedSampleDTO> {
+    return this.getSamplesService.handle({
+      page: page ? parseInt(page, 10) : 1,
+      limit: limit ? parseInt(limit, 10) : 10,
+      sortBy: sortBy ?? '',
+      sortOrder: sortOrder ?? 'desc',
+    });
   }
 
   @Get(':id')

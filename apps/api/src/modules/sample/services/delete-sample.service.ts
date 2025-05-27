@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { DatabaseService } from '@/core/database/database.module';
-import { ResultVoid } from '@/shared/abstractions';
-import { AppHttpError } from '@/shared/utils';
+import { DatabaseService } from '@/database/database.module';
+import { AppHttpError, ResultVoid } from '@/utils';
 
 import { GetSampleByIdService } from './get-sample-by-id.service';
 
