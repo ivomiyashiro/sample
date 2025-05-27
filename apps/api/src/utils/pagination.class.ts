@@ -74,11 +74,11 @@ export abstract class PaginationService<T> {
   }
 
   protected buildResult(
-    data: T[],
+    items: T[],
     pagination: PaginationMetadata,
   ): PaginatedResult<T> {
     return {
-      data,
+      items,
       pagination,
     };
   }

@@ -1,13 +1,13 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-export type AppHttpError = {
+export type AppErrorType = {
   type: HttpStatus;
   message?: string;
   details?: Record<string, string[]>;
 };
 
 export class AppException extends HttpException {
-  constructor(appError: AppHttpError) {
+  constructor(appError: AppErrorType) {
     const response = {
       type: appError.type,
       message:

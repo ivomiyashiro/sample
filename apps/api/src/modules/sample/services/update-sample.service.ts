@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { UpdateSampleDTO } from '@sample/shared';
 
 import { DatabaseService } from '@/database/database.module';
-import { AppHttpError, Result } from '@/utils';
+import { AppErrorType, Result } from '@/utils';
 
 import { SampleDTO } from '../dtos';
 import { GetSampleByIdService } from './get-sample-by-id.service';
@@ -17,7 +17,7 @@ export class UpdateSampleService {
   async handle(
     id: string,
     dto: UpdateSampleDTO,
-  ): Promise<Result<SampleDTO, AppHttpError>> {
+  ): Promise<Result<SampleDTO, AppErrorType>> {
     const result = await this.getSampleByIdService.handle(id);
 
     if (result.isFailure) {

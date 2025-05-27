@@ -1,1 +1,1 @@
-export * from './http-global.interceptor';
+export * from './global-http-response.interceptor';

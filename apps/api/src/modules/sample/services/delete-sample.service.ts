@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { DatabaseService } from '@/database/database.module';
-import { AppHttpError, ResultVoid } from '@/utils';
+import { AppErrorType, ResultVoid } from '@/utils';
 
 import { GetSampleByIdService } from './get-sample-by-id.service';
 
@@ -12,7 +12,7 @@ export class DeleteSampleService {
     private readonly getSampleByIdService: GetSampleByIdService,
   ) {}
 
-  async handle(id: string): Promise<ResultVoid<AppHttpError>> {
+  async handle(id: string): Promise<ResultVoid<AppErrorType>> {
     const result = await this.getSampleByIdService.handle(id);
 
     if (result.isFailure) {

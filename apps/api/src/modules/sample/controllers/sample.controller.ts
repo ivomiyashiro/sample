@@ -10,7 +10,8 @@ import {
 } from '@nestjs/common';
 import { CreateSampleDTO, UpdateSampleDTO } from '@sample/shared';
 
-import { AppHttpError, AppException, ResultVoid } from '@/utils';
+import { Public } from '@/decorators';
+import { AppErrorType, AppException, ResultVoid } from '@/utils';
 
 import {
   CreateSampleService,
@@ -44,6 +45,7 @@ export class SampleController {
     );
   }
 
+  @Public()
   @Get()
   async getSamples(
     @Query('page') page?: string,
@@ -59,6 +61,7 @@ export class SampleController {
     });
   }
 
+  @Public()
   @Get(':id')
   async getSample(@Param('id') id: string): Promise<SampleDTO> {
     const result = await this.getSampleByIdService.handle(id);
@@ -89,7 +92,7 @@ export class SampleController {
   @Delete(':id')
   async deleteSample(
     @Param('id') id: string,
-  ): Promise<ResultVoid<AppHttpError>> {
+  ): Promise<ResultVoid<AppErrorType>> {
     const result = await this.deleteSampleService.handle(id);
 
     return result.match(
