@@ -1,3 +1,3 @@
-export * from './app-http-exception.class';
+export * from './app-exception';
 export * from './result.class';
 export * from './pagination.class';

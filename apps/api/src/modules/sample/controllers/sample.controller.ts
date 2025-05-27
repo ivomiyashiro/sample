@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { CreateSampleDTO, UpdateSampleDTO } from '@sample/shared';
 
-import { AppHttpError, AppHttpException, ResultVoid } from '@/utils';
+import { AppHttpError, AppException, ResultVoid } from '@/utils';
 
 import {
   CreateSampleService,
@@ -39,7 +39,7 @@ export class SampleController {
     return result.match(
       (value) => value,
       (error) => {
-        throw new AppHttpException(error);
+        throw new AppException(error);
       },
     );
   }
@@ -66,7 +66,7 @@ export class SampleController {
     return result.match(
       (value) => value,
       (error) => {
-        throw new AppHttpException(error);
+        throw new AppException(error);
       },
     );
   }
@@ -81,7 +81,7 @@ export class SampleController {
     return result.match(
       (value) => value,
       (error) => {
-        throw new AppHttpException(error);
+        throw new AppException(error);
       },
     );
   }
@@ -95,7 +95,7 @@ export class SampleController {
     return result.match(
       () => ResultVoid.success(),
       (error) => {
-        throw new AppHttpException(error);
+        throw new AppException(error);
       },
     );
   }

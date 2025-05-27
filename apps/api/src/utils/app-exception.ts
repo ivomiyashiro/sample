@@ -6,13 +6,12 @@ export type AppHttpError = {
   details?: Record<string, string[]>;
 };
 
-export class AppHttpException extends HttpException {
+export class AppException extends HttpException {
   constructor(appError: AppHttpError) {
     const response = {
       type: appError.type,
       message:
-        appError.message ||
-        AppHttpException.getMessageFromStatus(appError.type),
+        appError.message || AppException.getMessageFromStatus(appError.type),
       details: appError.details,
     };
 
