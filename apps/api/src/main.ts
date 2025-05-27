@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { config } from './core/config';
 import { GlobalExceptionFilter } from './core/filters';
 import { HttpGlobalInterceptor } from './core/interceptors';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,7 +11,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new HttpGlobalInterceptor());
   app.useGlobalFilters(new GlobalExceptionFilter());
 
-  await app.listen(process.env.PORT ?? 3030);
+  await app.listen(config().PORT);
 }
 
 void bootstrap();
