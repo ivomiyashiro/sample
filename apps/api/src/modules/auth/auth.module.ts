@@ -8,7 +8,9 @@ import {
   SignInService,
   SignOutService,
   RefreshTokenService,
+  SignInWithOAuthService,
 } from './services';
+import { SupabaseService } from '../supabase/supabase.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
@@ -28,9 +30,11 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
   ],
   controllers: [AuthController],
   providers: [
+    SupabaseService,
     SignUpService,
     SignInService,
     SignOutService,
+    SignInWithOAuthService,
     RefreshTokenService,
     JwtStrategy,
     JwtAuthGuard,

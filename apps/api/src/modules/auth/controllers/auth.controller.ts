@@ -14,12 +14,13 @@ import { config } from '@/config';
 import { Public, User } from '@/decorators';
 import { AppException } from '@/utils';
 
-import { SignUpDto, SignInDto, UserDTO } from '../dtos';
+import { SignInProviderEnum, SignUpDto, SignInDto, UserDTO } from '../dtos';
 import {
   SignUpService,
   SignInService,
   SignOutService,
   RefreshTokenService,
+  SignInWithOAuthService,
 } from '../services';
 
 interface RequestWithCookies extends Request {
@@ -34,6 +35,7 @@ export class AuthController {
   constructor(
     private readonly signUpService: SignUpService,
     private readonly signInService: SignInService,
+    private readonly signInWithOAuthService: SignInWithOAuthService,
     private readonly signOutService: SignOutService,
     private readonly refreshTokenService: RefreshTokenService,
   ) {}
@@ -74,6 +76,26 @@ export class AuthController {
             accessToken: value.session.accessToken,
             expiresAt: value.session.expiresAt,
           },
+        };
+      },
+      (error) => {
+        throw new AppException(error);
+      },
+    );
+  }
+
+  @Public()
+  @Post('signin/github')
+  async signInWithGithub() {
+    const result = await this.signInWithOAuthService.handler(
+      SignInProviderEnum.GITHUB,
+    );
+
+    return result.match(
+      (value) => {
+        return {
+          message: 'OAuth URL generated successfully',
+          url: value.url,
         };
       },
       (error) => {
@@ -144,5 +166,15 @@ export class AuthController {
   @Get('me')
   getCurrentUser(@User() user: UserDTO) {
     return user;
+  }
+
+  @Public()
+  @Get('callback')
+  handleOAuthCallback() {
+    // This endpoint handles the OAuth callback from GitHub
+    // The frontend should handle the actual token exchange
+    return {
+      message: 'OAuth callback received. Handle token exchange on frontend.',
+    };
   }
 }
