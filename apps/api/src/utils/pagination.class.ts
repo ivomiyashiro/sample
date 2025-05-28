@@ -2,7 +2,7 @@ import {
   PaginationQuery,
   PaginatedResult,
   PaginationMetadata,
-} from '../dtos/pagination.dto';
+} from '../common/dtos/pagination.dto';
 
 export interface PaginationOptions {
   defaultLimit?: number;

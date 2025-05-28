@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { CreateSampleDTO, UpdateSampleDTO } from '@sample/shared';
 
-import { Public } from '@/decorators';
+import { Public } from '@/common/decorators';
 import { AppErrorType, AppException, ResultVoid } from '@/utils';
 
 import {

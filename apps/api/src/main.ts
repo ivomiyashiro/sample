@@ -4,8 +4,8 @@ import helmet from 'helmet';
 
 import { config } from './config';
 
-import { GlobalExceptionFilter } from './filters';
-import { GlobalHttpResponseInterceptor } from './interceptors';
+import { GlobalExceptionFilter } from './common/filters';
+import { GlobalHttpResponseInterceptor } from './common/interceptors';
 import { AppModule } from './app.module';
 
 async function bootstrap() {

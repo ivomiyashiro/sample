@@ -11,7 +11,7 @@ import {
 import { Request, Response } from 'express';
 
 import { config } from '@/config';
-import { Public, User } from '@/decorators';
+import { Public, User } from '@/common/decorators';
 import { AppException } from '@/utils';
 
 import { SignInProviderEnum, SignUpDto, SignInDto, UserDTO } from '../dtos';

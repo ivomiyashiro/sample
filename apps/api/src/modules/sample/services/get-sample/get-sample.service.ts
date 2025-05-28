@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
 import { DatabaseService } from '@/modules/database/database.module';
-import { PaginationQuery } from '@/dtos/pagination.dto';
+import { PaginationQuery } from '@/common/dtos/pagination.dto';
 import { PaginationService } from '@/utils';
 
 import { SampleDTO, PaginatedSampleDTO } from '../../dtos';

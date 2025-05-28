@@ -1,4 +1,4 @@
-import { PaginatedResult } from '@/dtos/pagination.dto';
+import { PaginatedResult } from '@/common/dtos/pagination.dto';
 import { SampleDTO } from './sample.dto';
 
 export type PaginatedSampleDTO = PaginatedResult<SampleDTO>;

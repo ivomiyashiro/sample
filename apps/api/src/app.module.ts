@@ -8,7 +8,7 @@ import { DatabaseModule } from './modules/database/database.module';
 import { SampleModule } from './modules/sample/sample.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SupabaseModule } from './modules/supabase/supabase.module';
-import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 
 @Module({
   imports: [
