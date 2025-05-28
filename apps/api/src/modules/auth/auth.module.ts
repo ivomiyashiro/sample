@@ -4,7 +4,6 @@ import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './controllers/auth.controller';
 import {
-  SupabaseService,
   SignUpService,
   SignInService,
   SignOutService,
@@ -29,7 +28,6 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
   ],
   controllers: [AuthController],
   providers: [
-    SupabaseService,
     SignUpService,
     SignInService,
     SignOutService,

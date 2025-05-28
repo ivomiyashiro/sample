@@ -2,16 +2,16 @@ import { Injectable, HttpStatus } from '@nestjs/common';
 import { AuthResponse } from '@supabase/supabase-js';
 
 import { Result, AppErrorType } from '@/utils';
+import { SupabaseService } from '@/modules/supabase/supabase.service';
 
-import { SupabaseService } from './supabase.service';
-import { SignInDto, AuthResultDTO } from '../dtos';
-import { UserMapper, SessionMapper } from '../utils';
+import { AuthResultDTO, SignInDto } from '@/modules/auth/dtos';
+import { UserMapper, SessionMapper } from '@/modules/auth/utils';
 
 @Injectable()
 export class SignInService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
-  async handle(
+  async handler(
     signInDto: SignInDto,
   ): Promise<Result<AuthResultDTO, AppErrorType>> {
     const supabase = this.supabaseService.getClient();

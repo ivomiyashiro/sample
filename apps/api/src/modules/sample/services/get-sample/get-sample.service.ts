@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
-import { DatabaseService } from '@/database/database.module';
+import { DatabaseService } from '@/modules/database/database.module';
 import { PaginationQuery } from '@/dtos/pagination.dto';
 import { PaginationService } from '@/utils';
 
-import { SampleDTO, PaginatedSampleDTO } from '../dtos';
+import { SampleDTO, PaginatedSampleDTO } from '../../dtos';
 
 @Injectable()
 export class GetSamplesService extends PaginationService<SampleDTO> {
@@ -19,7 +19,7 @@ export class GetSamplesService extends PaginationService<SampleDTO> {
     });
   }
 
-  async handle(query: PaginationQuery): Promise<PaginatedSampleDTO> {
+  async handler(query: PaginationQuery): Promise<PaginatedSampleDTO> {
     const { page, limit, skip, orderBy } = this.normalizeQuery(query);
 
     const [totalItems, data] = await Promise.all([

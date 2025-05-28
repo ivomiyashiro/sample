@@ -1,11 +1,12 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { UpdateSampleDTO } from '@sample/shared';
 
-import { DatabaseService } from '@/database/database.module';
+import { DatabaseService } from '@/modules/database/database.module';
 import { AppErrorType, Result } from '@/utils';
 
-import { SampleDTO } from '../dtos';
-import { GetSampleByIdService } from './get-sample-by-id.service';
+import { SampleDTO } from '@/modules/sample/dtos';
+import { GetSampleByIdService } from '../get-sample-by-id/get-sample-by-id.service';
+import { updateSampleValidator } from './update-sample.validator';
 
 @Injectable()
 export class UpdateSampleService {
@@ -14,11 +15,21 @@ export class UpdateSampleService {
     private readonly getSampleByIdService: GetSampleByIdService,
   ) {}
 
-  async handle(
+  async handler(
     id: string,
     dto: UpdateSampleDTO,
   ): Promise<Result<SampleDTO, AppErrorType>> {
-    const result = await this.getSampleByIdService.handle(id);
+    const validationResult = updateSampleValidator.safeParse(dto);
+
+    if (!validationResult.success) {
+      return Result.failure({
+        type: HttpStatus.BAD_REQUEST,
+        message: 'Validation failed',
+        details: validationResult.error.flatten().fieldErrors,
+      });
+    }
+
+    const result = await this.getSampleByIdService.handler(id);
 
     if (result.isFailure) {
       return Result.failure(result.error);

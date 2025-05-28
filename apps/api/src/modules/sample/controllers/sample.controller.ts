@@ -35,7 +35,7 @@ export class SampleController {
 
   @Post()
   async createSample(@Body() body: CreateSampleDTO): Promise<SampleDTO> {
-    const result = await this.createSampleService.handle(body);
+    const result = await this.createSampleService.handler(body);
 
     return result.match(
       (value) => value,
@@ -53,7 +53,7 @@ export class SampleController {
     @Query('sortBy') sortBy?: string,
     @Query('sortOrder') sortOrder?: 'asc' | 'desc',
   ): Promise<PaginatedSampleDTO> {
-    return this.getSamplesService.handle({
+    return this.getSamplesService.handler({
       page: page ? parseInt(page, 10) : 1,
       limit: limit ? parseInt(limit, 10) : 10,
       sortBy: sortBy ?? '',
@@ -64,7 +64,7 @@ export class SampleController {
   @Public()
   @Get(':id')
   async getSample(@Param('id') id: string): Promise<SampleDTO> {
-    const result = await this.getSampleByIdService.handle(id);
+    const result = await this.getSampleByIdService.handler(id);
 
     return result.match(
       (value) => value,
@@ -79,7 +79,7 @@ export class SampleController {
     @Param('id') id: string,
     @Body() body: UpdateSampleDTO,
   ): Promise<SampleDTO> {
-    const result = await this.updateSampleService.handle(id, body);
+    const result = await this.updateSampleService.handler(id, body);
 
     return result.match(
       (value) => value,
@@ -93,7 +93,7 @@ export class SampleController {
   async deleteSample(
     @Param('id') id: string,
   ): Promise<ResultVoid<AppErrorType>> {
-    const result = await this.deleteSampleService.handle(id);
+    const result = await this.deleteSampleService.handler(id);
 
     return result.match(
       () => ResultVoid.success(),

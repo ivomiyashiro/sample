@@ -84,5 +84,5 @@ export abstract class PaginationService<T> {
   }
 
   // Abstract method that implementing classes must provide
-  abstract handle(query: PaginationQuery): Promise<PaginatedResult<T>>;
+  abstract handler(query: PaginationQuery): Promise<PaginatedResult<T>>;
 }

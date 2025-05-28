@@ -4,9 +4,10 @@ import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 import { config } from './config';
-import { DatabaseModule } from './database/database.module';
+import { DatabaseModule } from './modules/database/database.module';
 import { SampleModule } from './modules/sample/sample.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { SupabaseModule } from './modules/supabase/supabase.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 
 @Module({
@@ -14,6 +15,7 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
     AuthModule,
     SampleModule,
     DatabaseModule,
+    SupabaseModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [config],

@@ -2,16 +2,18 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { CreateSampleDTO } from '@sample/shared';
 
 import { AppErrorType, Result } from '@/utils';
-import { DatabaseService } from '@/database/database.module';
+import { DatabaseService } from '@/modules/database/database.module';
 
-import { SampleDTO } from '../dtos';
-import { createSampleValidator } from '../validators';
+import { SampleDTO } from '@/modules/sample/dtos';
+import { createSampleValidator } from './create-sample.validator';
 
 @Injectable()
 export class CreateSampleService {
   constructor(private readonly prismaService: DatabaseService) {}
 
-  async handle(dto: CreateSampleDTO): Promise<Result<SampleDTO, AppErrorType>> {
+  async handler(
+    dto: CreateSampleDTO,
+  ): Promise<Result<SampleDTO, AppErrorType>> {
     const validationResult = createSampleValidator.safeParse(dto);
 
     if (!validationResult.success) {

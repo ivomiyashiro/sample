@@ -1,18 +1,18 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
 import { AuthResponse } from '@supabase/supabase-js';
 
+import { SupabaseService } from '@/modules/supabase/supabase.service';
 import { Result, AppErrorType } from '@/utils';
 
-import { signUpValidator } from '../validators';
-import { SupabaseService } from './supabase.service';
-import { SignUpDto, AuthResultDTO } from '../dtos';
-import { UserMapper, SessionMapper } from '../utils';
+import { AuthResultDTO, SignUpDto } from '@/modules/auth/dtos';
+import { UserMapper, SessionMapper } from '@/modules/auth/utils';
+import { signUpValidator } from './sign-up.validator';
 
 @Injectable()
 export class SignUpService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
-  async handle(
+  async handler(
     signUpDto: SignUpDto,
   ): Promise<Result<AuthResultDTO, AppErrorType>> {
     const validationResult = signUpValidator.safeParse(signUpDto);

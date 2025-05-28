@@ -4,22 +4,23 @@ import { AuthResponse } from '@supabase/supabase-js';
 import { Result } from '@/utils';
 import { AppErrorType } from '@/utils';
 
-import { SupabaseService } from './supabase.service';
-import { AuthResultDTO } from '../dtos';
-import { UserMapper } from '../utils/user.mapper';
-import { SessionMapper } from '../utils/session.mapper';
-import { refreshTokenSchema } from '../validators';
+import { SupabaseService } from '../../../supabase/supabase.service';
+import { AuthResultDTO } from '../../dtos';
+import { UserMapper, SessionMapper } from '../../utils';
+import { refreshTokenValidator } from './refresh-token.validator';
 
 @Injectable()
 export class RefreshTokenService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
-  async handle(
+  async handler(
     refreshToken: string,
   ): Promise<Result<AuthResultDTO, AppErrorType>> {
-    const { success, error: validationError } = refreshTokenSchema.safeParse({
-      refreshToken,
-    });
+    const { success, error: validationError } = refreshTokenValidator.safeParse(
+      {
+        refreshToken,
+      },
+    );
 
     if (!success) {
       return Result.failure({

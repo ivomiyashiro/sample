@@ -41,7 +41,7 @@ export class AuthController {
   @Public()
   @Post('signup')
   async signUp(@Body() signUpDto: SignUpDto) {
-    const result = await this.signUpService.handle(signUpDto);
+    const result = await this.signUpService.handler(signUpDto);
 
     return result.match(
       (value) => value,
@@ -57,7 +57,7 @@ export class AuthController {
     @Body() signInDto: SignInDto,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const result = await this.signInService.handle(signInDto);
+    const result = await this.signInService.handler(signInDto);
 
     return result.match(
       (value) => {
@@ -89,7 +89,7 @@ export class AuthController {
   ) {
     const token = authorization.replace('Bearer ', '');
 
-    const result = await this.signOutService.handle(token);
+    const result = await this.signOutService.handler(token);
 
     return result.match(
       () => {
@@ -116,7 +116,7 @@ export class AuthController {
       });
     }
 
-    const result = await this.refreshTokenService.handle(refreshToken);
+    const result = await this.refreshTokenService.handler(refreshToken);
 
     return result.match(
       (value) => {
