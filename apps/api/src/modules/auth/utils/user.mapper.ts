@@ -3,10 +3,9 @@ import { UserDTO } from '../dtos';
 
 export class UserMapper {
   static mapToUserDTO(user: User): UserDTO {
-    const userObj = {
+    const userObj: UserDTO = {
       userId: user.id,
       email: user.email,
-      createdAt: user.created_at,
     };
 
     return userObj;

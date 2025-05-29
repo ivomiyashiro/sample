@@ -8,7 +8,7 @@ import { JwtStrategy } from '@/modules/auth/strategies/jwt.strategy';
 
 import { AuthController } from './controllers/auth.controller';
 
-import { SupabaseService } from '@/modules/supabase/supabase.service';
+import { AuthSupabaseService } from '@/common/services/supabase/services';
 import {
   SignUpService,
   SignInService,
@@ -33,7 +33,7 @@ import {
   ],
   controllers: [AuthController],
   providers: [
-    SupabaseService,
+    AuthSupabaseService,
     SignUpService,
     SignInService,
     SignOutService,

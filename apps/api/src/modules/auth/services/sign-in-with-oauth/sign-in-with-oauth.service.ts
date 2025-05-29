@@ -1,9 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 
-import { config } from '@/config';
 import { AppErrorType, Result } from '@/utils';
 
-import { SupabaseService } from '@/modules/supabase/supabase.service';
+import { AuthSupabaseService } from '@/common/services/supabase/services';
 import { OAuthSignInResult, SignInProviderEnum } from '@/modules/auth/dtos';
 
 /**
@@ -19,34 +18,27 @@ import { OAuthSignInResult, SignInProviderEnum } from '@/modules/auth/dtos';
  */
 @Injectable()
 export class SignInWithOAuthService {
-  constructor(private readonly supabaseService: SupabaseService) {}
+  constructor(private readonly authSupabaseService: AuthSupabaseService) {}
 
   async handler(
     provider: SignInProviderEnum,
   ): Promise<Result<OAuthSignInResult, AppErrorType>> {
-    const supabase = this.supabaseService.getClient();
+    const result = await this.authSupabaseService.signInWithOAuth(provider);
 
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: `${config().FRONTEND_URL}/auth/callback`,
-      },
-    });
-
-    if (error) {
+    if (result.isFailure) {
       return Result.failure({
         type: HttpStatus.BAD_REQUEST,
-        message: error.message,
+        message: result.error.message ?? 'Failed to generate OAuth URL',
       });
     }
 
-    if (!data.url) {
+    if (!result.value.url) {
       return Result.failure({
         type: HttpStatus.INTERNAL_SERVER_ERROR,
         message: 'Failed to generate OAuth URL',
       });
     }
 
-    return Result.success({ url: data.url });
+    return Result.success({ url: result.value.url });
   }
 }

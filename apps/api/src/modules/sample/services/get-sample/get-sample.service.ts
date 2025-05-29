@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
-import { DatabaseService } from '@/modules/database/database.module';
+import { DatabaseService } from '@/common/services/database/database.module';
 import { PaginationQuery } from '@/common/dtos/pagination.dto';
 import { PaginationService } from '@/utils';
 

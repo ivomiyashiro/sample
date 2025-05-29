@@ -1,7 +1,6 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
-import { AuthResponse } from '@supabase/supabase-js';
 
-import { SupabaseService } from '@/modules/supabase/supabase.service';
+import { AuthSupabaseService } from '@/common/services/supabase/services';
 import { Result, AppErrorType } from '@/utils';
 
 import { AuthResultDTO, SignUpDto } from '@/modules/auth/dtos';
@@ -10,7 +9,7 @@ import { signUpValidator } from './sign-up.validator';
 
 @Injectable()
 export class SignUpService {
-  constructor(private readonly supabaseService: SupabaseService) {}
+  constructor(private readonly authSupabaseService: AuthSupabaseService) {}
 
   async handler(
     signUpDto: SignUpDto,
@@ -25,21 +24,16 @@ export class SignUpService {
       });
     }
 
-    const supabase = this.supabaseService.getClient();
+    const result = await this.authSupabaseService.signUp(signUpDto);
 
-    const { data, error }: AuthResponse = await supabase.auth.signUp({
-      email: signUpDto.email,
-      password: signUpDto.password,
-    });
-
-    if (error) {
+    if (result.isFailure) {
       return Result.failure({
         type: HttpStatus.BAD_REQUEST,
-        message: error.message,
+        message: result.error.message ?? 'Failed to create user',
       });
     }
 
-    if (!data.user || !data.session) {
+    if (!result.value.user || !result.value.session) {
       return Result.failure({
         type: HttpStatus.BAD_REQUEST,
         message: 'Failed to create user',
@@ -47,8 +41,8 @@ export class SignUpService {
     }
 
     return Result.success({
-      user: UserMapper.mapToUserDTO(data.user),
-      session: SessionMapper.mapToSessionDTO(data.session),
+      user: UserMapper.mapToUserDTO(result.value.user),
+      session: SessionMapper.mapToSessionDTO(result.value.session),
     });
   }
 }

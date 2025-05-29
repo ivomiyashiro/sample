@@ -61,6 +61,12 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.49.8
         version: 2.49.8
+      '@types/body-parser':
+        specifier: ^1.19.5
+        version: 1.19.5
+      body-parser:
+        specifier: ^2.2.0
+        version: 2.2.0
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7

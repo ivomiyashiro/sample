@@ -1,20 +1,18 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
 import { ResultVoid, AppErrorType } from '@/utils';
-import { SupabaseService } from '@/modules/supabase/supabase.service';
+import { AuthSupabaseService } from '@/common/services/supabase/services';
 
 @Injectable()
 export class SignOutService {
-  constructor(private readonly supabaseService: SupabaseService) {}
+  constructor(private readonly authSupabaseService: AuthSupabaseService) {}
 
-  async handler(accessToken: string): Promise<ResultVoid<AppErrorType>> {
-    const supabase = this.supabaseService.getClientWithAuth(accessToken);
+  async handler(): Promise<ResultVoid<AppErrorType>> {
+    const result = await this.authSupabaseService.signOut();
 
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
+    if (result.isFailure) {
       return ResultVoid.failure({
         type: HttpStatus.BAD_REQUEST,
-        message: error.message,
+        message: result.error.message ?? 'Failed to sign out',
       });
     }
 

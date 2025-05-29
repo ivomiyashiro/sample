@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
+
 import { config } from '@/config';
 
 @Injectable()
-export class SupabaseService {
+export class BaseSupabaseService {
   private supabaseAdmin: SupabaseClient;
   private supabaseClient: SupabaseClient;
 
@@ -39,18 +40,5 @@ export class SupabaseService {
    */
   getClient(): SupabaseClient {
     return this.supabaseClient;
-  }
-
-  /**
-   * Get client with user session
-   */
-  getClientWithAuth(accessToken: string): SupabaseClient {
-    return createClient(config().SUPABASE_URL, config().SUPABASE_ANON_KEY, {
-      global: {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    });
   }
 }

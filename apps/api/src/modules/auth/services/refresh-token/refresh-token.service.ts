@@ -1,17 +1,16 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
-import { AuthResponse } from '@supabase/supabase-js';
 
 import { Result } from '@/utils';
 import { AppErrorType } from '@/utils';
+import { AuthSupabaseService } from '@/common/services/supabase/services';
 
-import { SupabaseService } from '../../../supabase/supabase.service';
 import { AuthResultDTO } from '../../dtos';
 import { UserMapper, SessionMapper } from '../../utils';
 import { refreshTokenValidator } from './refresh-token.validator';
 
 @Injectable()
 export class RefreshTokenService {
-  constructor(private readonly supabaseService: SupabaseService) {}
+  constructor(private readonly authSupabaseService: AuthSupabaseService) {}
 
   async handler(
     refreshToken: string,
@@ -30,20 +29,16 @@ export class RefreshTokenService {
       });
     }
 
-    const supabase = this.supabaseService.getClient();
+    const result = await this.authSupabaseService.refreshToken(refreshToken);
 
-    const { data, error }: AuthResponse = await supabase.auth.refreshSession({
-      refresh_token: refreshToken,
-    });
-
-    if (error) {
+    if (result.isFailure) {
       return Result.failure({
         type: HttpStatus.UNAUTHORIZED,
-        message: error.message,
+        message: result.error.message ?? 'Failed to refresh token',
       });
     }
 
-    if (!data.user || !data.session) {
+    if (!result.value.user || !result.value.session) {
       return Result.failure({
         type: HttpStatus.UNAUTHORIZED,
         message: 'Failed to refresh token',
@@ -51,8 +46,8 @@ export class RefreshTokenService {
     }
 
     return Result.success({
-      user: UserMapper.mapToUserDTO(data.user),
-      session: SessionMapper.mapToSessionDTO(data.session),
+      user: UserMapper.mapToUserDTO(result.value.user),
+      session: SessionMapper.mapToSessionDTO(result.value.session),
     });
   }
 }

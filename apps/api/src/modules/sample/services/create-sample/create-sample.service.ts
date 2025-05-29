@@ -2,14 +2,18 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { CreateSampleDTO } from '@sample/shared';
 
 import { AppErrorType, Result } from '@/utils';
-import { DatabaseService } from '@/modules/database/database.module';
+import { DatabaseService } from '@/common/services/database/database.module';
+import { StorageSupabaseService } from '@/common/services/supabase/services/storage-supabase.service';
 
-import { SampleDTO } from '@/modules/sample/dtos';
+import { SampleDTO } from '../../dtos';
 import { createSampleValidator } from './create-sample.validator';
 
 @Injectable()
 export class CreateSampleService {
-  constructor(private readonly prismaService: DatabaseService) {}
+  constructor(
+    private readonly prismaService: DatabaseService,
+    private readonly storageSupabaseService: StorageSupabaseService,
+  ) {}
 
   async handler(
     dto: CreateSampleDTO,
@@ -40,11 +44,33 @@ export class CreateSampleService {
       });
     }
 
+    let imageUrl: string | null = null;
+    if (validationResult.data.image) {
+      const result = await this.storageSupabaseService.upload('samples', {
+        base64: validationResult.data.image.base64,
+        name: validationResult.data.image.fileName,
+        extension: validationResult.data.image.extension,
+        mimeType: validationResult.data.image.mimeType,
+      });
+
+      if (result.isFailure) {
+        return Result.failure({
+          type: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: 'Failed to upload image',
+          details: {
+            imageUrl: ['Failed to upload image'],
+          },
+        });
+      }
+
+      imageUrl = result.value;
+    }
+
     const sample = await this.prismaService.sample.create({
       data: {
         name: validationResult.data.name,
-        description: validationResult.data.description,
-        imageUrl: validationResult.data.imageUrl,
+        description: validationResult.data.description ?? null,
+        imageUrl,
       },
     });
 

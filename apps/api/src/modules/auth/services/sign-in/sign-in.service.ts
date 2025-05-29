@@ -1,35 +1,28 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
-import { AuthResponse } from '@supabase/supabase-js';
 
 import { Result, AppErrorType } from '@/utils';
-import { SupabaseService } from '@/modules/supabase/supabase.service';
+import { AuthSupabaseService } from '@/common/services/supabase/services';
 
 import { AuthResultDTO, SignInDto } from '@/modules/auth/dtos';
 import { UserMapper, SessionMapper } from '@/modules/auth/utils';
 
 @Injectable()
 export class SignInService {
-  constructor(private readonly supabaseService: SupabaseService) {}
+  constructor(private readonly authSupabaseService: AuthSupabaseService) {}
 
   async handler(
     signInDto: SignInDto,
   ): Promise<Result<AuthResultDTO, AppErrorType>> {
-    const supabase = this.supabaseService.getClient();
+    const result = await this.authSupabaseService.signIn(signInDto);
 
-    const { data, error }: AuthResponse =
-      await supabase.auth.signInWithPassword({
-        email: signInDto.email,
-        password: signInDto.password,
-      });
-
-    if (error) {
+    if (result.isFailure) {
       return Result.failure({
         type: HttpStatus.UNAUTHORIZED,
-        message: error.message,
+        message: result.error.message ?? 'Invalid credentials',
       });
     }
 
-    if (!data.user || !data.session) {
+    if (!result.value.user || !result.value.session) {
       return Result.failure({
         type: HttpStatus.UNAUTHORIZED,
         message: 'Invalid credentials',
@@ -37,8 +30,8 @@ export class SignInService {
     }
 
     return Result.success({
-      user: UserMapper.mapToUserDTO(data.user),
-      session: SessionMapper.mapToSessionDTO(data.session),
+      user: UserMapper.mapToUserDTO(result.value.user),
+      session: SessionMapper.mapToSessionDTO(result.value.session),
     });
   }
 }

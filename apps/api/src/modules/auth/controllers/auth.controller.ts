@@ -3,7 +3,6 @@ import {
   Post,
   Get,
   Body,
-  Headers,
   Res,
   HttpStatus,
   Req,
@@ -105,13 +104,8 @@ export class AuthController {
   }
 
   @Post('signout')
-  async signOut(
-    @Headers('authorization') authorization: string,
-    @Res({ passthrough: true }) response: Response,
-  ) {
-    const token = authorization.replace('Bearer ', '');
-
-    const result = await this.signOutService.handler(token);
+  async signOut(@Res({ passthrough: true }) response: Response) {
+    const result = await this.signOutService.handler();
 
     return result.match(
       () => {

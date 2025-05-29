@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 
-import { DatabaseService } from '@/modules/database/database.module';
+import { DatabaseService } from '@/common/services/database/database.module';
 import { AppErrorType, Result } from '@/utils';
 
 import { SampleDTO } from '../../dtos';
