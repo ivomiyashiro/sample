@@ -1,9 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
+import { SampleDTO } from '@sample/shared';
 
 import { DatabaseService } from '@/common/services/database/database.module';
 import { AppErrorType, Result } from '@/utils';
-
-import { SampleDTO } from '../../dtos';
 
 @Injectable()
 export class GetSampleByIdService {

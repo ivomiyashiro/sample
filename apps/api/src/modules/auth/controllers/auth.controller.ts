@@ -8,12 +8,17 @@ import {
   Req,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import {
+  SignUpDTO,
+  SignInDTO,
+  UserDTO,
+  OAuthProviderEnum,
+} from '@sample/shared';
 
 import { config } from '@/config';
 import { Public, User } from '@/common/decorators';
 import { AppException } from '@/utils';
 
-import { SignInProviderEnum, SignUpDto, SignInDto, UserDTO } from '../dtos';
 import {
   SignUpService,
   SignInService,
@@ -41,7 +46,7 @@ export class AuthController {
 
   @Public()
   @Post('signup')
-  async signUp(@Body() signUpDto: SignUpDto) {
+  async signUp(@Body() signUpDto: SignUpDTO) {
     const result = await this.signUpService.handler(signUpDto);
 
     return result.match(
@@ -55,7 +60,7 @@ export class AuthController {
   @Public()
   @Post('signin')
   async signIn(
-    @Body() signInDto: SignInDto,
+    @Body() signInDto: SignInDTO,
     @Res({ passthrough: true }) response: Response,
   ) {
     const result = await this.signInService.handler(signInDto);
@@ -87,7 +92,7 @@ export class AuthController {
   @Post('signin/github')
   async signInWithGithub() {
     const result = await this.signInWithOAuthService.handler(
-      SignInProviderEnum.GITHUB,
+      OAuthProviderEnum.GITHUB,
     );
 
     return result.match(

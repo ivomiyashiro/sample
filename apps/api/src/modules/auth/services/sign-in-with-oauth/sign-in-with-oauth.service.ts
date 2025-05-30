@@ -1,9 +1,9 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
+import { OAuthProviderEnum, OAuthSignInResult } from '@sample/shared';
 
 import { AppErrorType, Result } from '@/utils';
 
 import { AuthSupabaseService } from '@/common/services/supabase/services';
-import { OAuthSignInResult, SignInProviderEnum } from '@/modules/auth/dtos';
 
 /**
  * Service for handling OAuth sign-in flows with external providers
@@ -21,7 +21,7 @@ export class SignInWithOAuthService {
   constructor(private readonly authSupabaseService: AuthSupabaseService) {}
 
   async handler(
-    provider: SignInProviderEnum,
+    provider: OAuthProviderEnum,
   ): Promise<Result<OAuthSignInResult, AppErrorType>> {
     const result = await this.authSupabaseService.signInWithOAuth(provider);
 

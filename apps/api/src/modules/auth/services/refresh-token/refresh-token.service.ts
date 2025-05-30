@@ -1,10 +1,10 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
+import { AuthResultDTO } from '@sample/shared';
 
 import { Result } from '@/utils';
 import { AppErrorType } from '@/utils';
 import { AuthSupabaseService } from '@/common/services/supabase/services';
 
-import { AuthResultDTO } from '../../dtos';
 import { UserMapper, SessionMapper } from '../../utils';
 import { refreshTokenValidator } from './refresh-token.validator';
 

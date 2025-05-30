@@ -1,9 +1,9 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
+import { SignInDTO, AuthResultDTO } from '@sample/shared';
 
 import { Result, AppErrorType } from '@/utils';
 import { AuthSupabaseService } from '@/common/services/supabase/services';
 
-import { AuthResultDTO, SignInDto } from '@/modules/auth/dtos';
 import { UserMapper, SessionMapper } from '@/modules/auth/utils';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class SignInService {
   constructor(private readonly authSupabaseService: AuthSupabaseService) {}
 
   async handler(
-    signInDto: SignInDto,
+    signInDto: SignInDTO,
   ): Promise<Result<AuthResultDTO, AppErrorType>> {
     const result = await this.authSupabaseService.signIn(signInDto);
 

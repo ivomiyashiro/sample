@@ -1,9 +1,9 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
+import { SignUpDTO, AuthResultDTO } from '@sample/shared';
 
 import { AuthSupabaseService } from '@/common/services/supabase/services';
 import { Result, AppErrorType } from '@/utils';
 
-import { AuthResultDTO, SignUpDto } from '@/modules/auth/dtos';
 import { UserMapper, SessionMapper } from '@/modules/auth/utils';
 import { signUpValidator } from './sign-up.validator';
 
@@ -12,7 +12,7 @@ export class SignUpService {
   constructor(private readonly authSupabaseService: AuthSupabaseService) {}
 
   async handler(
-    signUpDto: SignUpDto,
+    signUpDto: SignUpDTO,
   ): Promise<Result<AuthResultDTO, AppErrorType>> {
     const validationResult = signUpValidator.safeParse(signUpDto);
 

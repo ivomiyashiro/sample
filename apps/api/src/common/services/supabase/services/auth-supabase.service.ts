@@ -1,9 +1,9 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Session, User } from '@supabase/supabase-js';
+import { OAuthProviderEnum, SignInDTO, SignUpDTO } from '@sample/shared';
 
 import { BaseSupabaseService } from './base-supabase.service';
 import { AppErrorType, ResultVoid } from '@/utils';
-import { SignInDto, SignInProviderEnum, SignUpDto } from '@/modules/auth/dtos';
 import { Result } from '@/utils';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthSupabaseService extends BaseSupabaseService {
   }
 
   async signUp(
-    signUpDto: SignUpDto,
+    signUpDto: SignUpDTO,
   ): Promise<Result<{ user: User; session: Session }, AppErrorType>> {
     const { data, error } = await this.getAdminClient().auth.signUp(signUpDto);
 
@@ -38,7 +38,7 @@ export class AuthSupabaseService extends BaseSupabaseService {
   }
 
   async signIn(
-    signInDto: SignInDto,
+    signInDto: SignInDTO,
   ): Promise<Result<{ user: User; session: Session }, AppErrorType>> {
     const { data, error } =
       await this.getAdminClient().auth.signInWithPassword(signInDto);
@@ -104,7 +104,7 @@ export class AuthSupabaseService extends BaseSupabaseService {
   }
 
   async signInWithOAuth(
-    provider: SignInProviderEnum,
+    provider: OAuthProviderEnum,
   ): Promise<Result<{ url: string }, AppErrorType>> {
     const { data, error } = await this.getAdminClient().auth.signInWithOAuth({
       provider,
