@@ -1,27 +1,28 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
+  Delete,
   Get,
   Param,
+  Post,
   Put,
-  Delete,
   Query,
 } from '@nestjs/common';
-import { CreateSampleDTO, UpdateSampleDTO, SampleDTO } from '@sample/shared';
 
-import { Public } from '@/common/decorators';
+import { CreateSampleDTO, SampleDTO, UpdateSampleDTO } from '@sample/shared';
+
 import { AppErrorType, AppException, ResultVoid } from '@/utils';
 
-import {
-  CreateSampleService,
-  GetSamplesService,
-  GetSampleByIdService,
-  DeleteSampleService,
-  UpdateSampleService,
-} from '../services';
+import { Public } from '@/common/decorators';
 
 import { PaginatedSampleDTO } from '../dtos';
+import {
+  CreateSampleService,
+  DeleteSampleService,
+  GetSampleByIdService,
+  GetSamplesService,
+  UpdateSampleService,
+} from '../services';
 
 @Controller('samples')
 export class SampleController {

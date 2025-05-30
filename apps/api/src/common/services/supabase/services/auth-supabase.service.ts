@@ -1,10 +1,13 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Session, User } from '@supabase/supabase-js';
+
 import { OAuthProviderEnum, SignInDTO, SignUpDTO } from '@sample/shared';
 
-import { BaseSupabaseService } from './base-supabase.service';
 import { AppErrorType, ResultVoid } from '@/utils';
 import { Result } from '@/utils';
+
+import { BaseSupabaseService } from './base-supabase.service';
+
+import { Session, User } from '@supabase/supabase-js';
 
 @Injectable()
 export class AuthSupabaseService extends BaseSupabaseService {

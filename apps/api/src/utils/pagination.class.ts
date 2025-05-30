@@ -1,7 +1,7 @@
 import {
-  PaginationQuery,
   PaginatedResult,
   PaginationMetadata,
+  PaginationQuery,
 } from '../common/dtos/pagination.dto';
 
 export interface PaginationOptions {

@@ -1,30 +1,33 @@
-import {
-  Controller,
-  Post,
-  Get,
-  Body,
-  Res,
-  HttpStatus,
-  Req,
-} from '@nestjs/common';
 import { Request, Response } from 'express';
+
 import {
-  SignUpDTO,
-  SignInDTO,
-  UserDTO,
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  Req,
+  Res,
+} from '@nestjs/common';
+
+import {
   OAuthProviderEnum,
+  SignInDTO,
+  SignUpDTO,
+  UserDTO,
 } from '@sample/shared';
 
 import { config } from '@/config';
-import { Public, User } from '@/common/decorators';
 import { AppException } from '@/utils';
 
+import { Public, User } from '@/common/decorators';
+
 import {
-  SignUpService,
-  SignInService,
-  SignOutService,
   RefreshTokenService,
+  SignInService,
   SignInWithOAuthService,
+  SignOutService,
+  SignUpService,
 } from '../services';
 
 interface RequestWithCookies extends Request {

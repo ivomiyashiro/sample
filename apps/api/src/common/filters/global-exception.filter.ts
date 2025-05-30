@@ -1,13 +1,15 @@
+import { Request, Response } from 'express';
+
 import {
-  ExceptionFilter,
-  Catch,
   ArgumentsHost,
+  Catch,
+  ExceptionFilter,
   HttpException,
   HttpStatus,
   Logger,
 } from '@nestjs/common';
+
 import { ErrorDetails, ErrorResponse } from '@sample/shared';
-import { Request, Response } from 'express';
 
 /**
  * Processed exception information

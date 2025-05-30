@@ -1,10 +1,11 @@
-import { Injectable, HttpStatus } from '@nestjs/common';
-import { SignInDTO, AuthResultDTO } from '@sample/shared';
+import { HttpStatus, Injectable } from '@nestjs/common';
 
-import { Result, AppErrorType } from '@/utils';
+import { AuthResultDTO, SignInDTO } from '@sample/shared';
+
+import { AppErrorType, Result } from '@/utils';
+
 import { AuthSupabaseService } from '@/common/services/supabase/services';
-
-import { UserMapper, SessionMapper } from '@/modules/auth/utils';
+import { SessionMapper, UserMapper } from '@/modules/auth/utils';
 
 @Injectable()
 export class SignInService {

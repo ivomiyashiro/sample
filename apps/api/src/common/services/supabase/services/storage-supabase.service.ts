@@ -1,5 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
+
 import { AppErrorType, Result, ResultVoid } from '@/utils';
+
 import { BaseSupabaseService } from './base-supabase.service';
 
 @Injectable()

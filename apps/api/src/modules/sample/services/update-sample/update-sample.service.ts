@@ -1,10 +1,13 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { UpdateSampleDTO, SampleDTO } from '@sample/shared';
 
-import { DatabaseService } from '@/common/services/database/database.module';
+import { SampleDTO, UpdateSampleDTO } from '@sample/shared';
+
 import { AppErrorType, Result } from '@/utils';
 
+import { DatabaseService } from '@/common/services/database/database.module';
+
 import { GetSampleByIdService } from '../get-sample-by-id/get-sample-by-id.service';
+
 import { updateSampleValidator } from './update-sample.validator';
 
 @Injectable()

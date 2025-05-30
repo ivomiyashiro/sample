@@ -1,4 +1,5 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
+
 import { OAuthProviderEnum, OAuthSignInResult } from '@sample/shared';
 
 import { AppErrorType, Result } from '@/utils';

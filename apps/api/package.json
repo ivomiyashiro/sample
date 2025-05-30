@@ -16,7 +16,8 @@
     "db:push": "prisma db push --schema=src/core/database/schema.prisma",
     "db:setup": "pnpm db:migrate && pnpm db:generate",
     "db:studio": "prisma studio --schema=src/core/database/schema.prisma",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"{src,apps,libs,test}/**/*.{ts,js,json,md,yml,yaml}\" && prisma format --schema=src/core/database/schema.prisma"
   },
   "dependencies": {
@@ -56,6 +57,7 @@
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^16.0.0",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.2",

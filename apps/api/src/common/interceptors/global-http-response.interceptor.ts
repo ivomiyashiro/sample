@@ -1,13 +1,16 @@
+import { Response } from 'express';
+
 import {
+  CallHandler,
+  ExecutionContext,
   Injectable,
   NestInterceptor,
-  ExecutionContext,
-  CallHandler,
 } from '@nestjs/common';
+
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Response } from 'express';
-import { SuccessResponse, PaginatedResponse } from '@sample/shared';
+
+import { PaginatedResponse, SuccessResponse } from '@sample/shared';
 
 /**
  * Normalizes the success response of the API.

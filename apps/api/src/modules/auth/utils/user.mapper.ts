@@ -1,5 +1,6 @@
-import { User } from '@supabase/supabase-js';
 import { UserDTO } from '@sample/shared';
+
+import { User } from '@supabase/supabase-js';
 
 export class UserMapper {
   static mapToUserDTO(user: User): UserDTO {

@@ -1,13 +1,13 @@
 import { NestFactory } from '@nestjs/core';
+
+import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
-import bodyParser from 'body-parser';
 
-import { config } from './config';
-
+import { AppModule } from './app.module';
 import { GlobalExceptionFilter } from './common/filters';
 import { GlobalHttpResponseInterceptor } from './common/interceptors';
-import { AppModule } from './app.module';
+import { config } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

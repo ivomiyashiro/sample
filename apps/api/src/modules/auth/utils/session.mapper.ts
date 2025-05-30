@@ -1,5 +1,6 @@
-import { Session } from '@supabase/supabase-js';
 import { SessionDTO } from '@sample/shared';
+
+import { Session } from '@supabase/supabase-js';
 
 export class SessionMapper {
   static mapToSessionDTO(session: Session): SessionDTO {

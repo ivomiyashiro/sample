@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
+
 import { SampleController } from './controllers/sample.controller';
 import {
   CreateSampleService,
-  GetSampleByIdService,
   DeleteSampleService,
+  GetSampleByIdService,
   GetSamplesService,
   UpdateSampleService,
 } from './services';

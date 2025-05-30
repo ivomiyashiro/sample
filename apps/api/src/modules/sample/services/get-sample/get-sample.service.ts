@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+
 import { SampleDTO } from '@sample/shared';
 
-import { DatabaseService } from '@/common/services/database/database.module';
-import { PaginationQuery } from '@/common/dtos/pagination.dto';
 import { PaginationService } from '@/utils';
 
+import { PaginationQuery } from '@/common/dtos/pagination.dto';
+import { DatabaseService } from '@/common/services/database/database.module';
+
 import { PaginatedSampleDTO } from '../../dtos';
+
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class GetSamplesService extends PaginationService<SampleDTO> {
