@@ -1,4 +1,4 @@
-interface BaseResponse {
+export interface BaseResponse {
   statusCode: number;
   success: boolean;
   timestamp: string;
@@ -7,11 +7,11 @@ interface BaseResponse {
 /**
  * Error details for development environment
  */
-export interface ErrorDetails {
+export type ErrorDetails = {
   cause?: unknown;
   stack?: string;
   type?: string;
-}
+};
 
 /**
  * Structured error response format
@@ -46,3 +46,10 @@ export interface PaginatedResponse<T> extends BaseResponse {
     };
   };
 }
+
+export type PaginatedQueryParams = {
+  page: number;
+  limit: number;
+  sortBy: string;
+  sortOrder: 'asc' | 'desc';
+};

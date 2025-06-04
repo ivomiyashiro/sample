@@ -70,7 +70,7 @@ export class AuthController {
 
     return result.match(
       (value) => {
-        response.cookie('refreshToken', value.session.refreshToken, {
+        response.cookie(config().JWT_NAME, value.session.refreshToken, {
           httpOnly: true,
           sameSite: 'strict',
           secure: config().NODE_ENV === 'production',
@@ -117,7 +117,7 @@ export class AuthController {
 
     return result.match(
       () => {
-        response.clearCookie('refreshToken');
+        response.clearCookie(config().JWT_NAME);
         return { message: 'Successfully signed out' };
       },
       (error) => {
@@ -126,12 +126,13 @@ export class AuthController {
     );
   }
 
+  @Public()
   @Post('refresh')
   async refreshToken(
     @Req() request: RequestWithCookies,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const refreshToken = request.cookies.refreshToken;
+    const refreshToken = request.cookies[config().JWT_NAME];
 
     if (!refreshToken) {
       throw new AppException({
@@ -144,7 +145,7 @@ export class AuthController {
 
     return result.match(
       (value) => {
-        response.cookie('refreshToken', value.session.refreshToken, {
+        response.cookie(config().JWT_NAME, value.session.refreshToken, {
           httpOnly: true,
           sameSite: 'strict',
           secure: config().NODE_ENV === 'production',

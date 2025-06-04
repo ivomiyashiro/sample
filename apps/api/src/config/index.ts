@@ -11,6 +11,7 @@ const configSchema = z.object({
   SUPABASE_ANON_KEY: z.string(),
   SUPABASE_SERVICE_ROLE_KEY: z.string(),
   SUPABASE_JWT_SECRET: z.string(),
+  JWT_NAME: z.string().default('token'),
   JWT_EXPIRATION_TIME: z.coerce.number().default(7 * 24 * 60 * 60 * 1000),
   FRONTEND_URL: z.string().url().default('http://localhost:3000'),
 });
