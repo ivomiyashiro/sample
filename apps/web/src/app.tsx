@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { AuthProvider } from '@/features/auth/providers';
 import { AppRouter } from '@/features/router';
 import { ThemeProvider } from '@/features/theme/providers';
-import { AuthProvider } from '@/features/auth/providers';
 
 const queryClient = new QueryClient();
 

@@ -1,4 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
+
 import sampleApi from '@/features/samples/sample.api';
 
 export const useSampleQuery = () => {

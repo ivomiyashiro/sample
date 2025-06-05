@@ -1,5 +1,4 @@
 import type { QueryClient } from '@tanstack/react-query';
-
 import type { ActionFunction } from 'react-router';
 import type { LoaderFunction } from 'react-router';
 

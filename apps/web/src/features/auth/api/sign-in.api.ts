@@ -5,10 +5,10 @@ import type {
   SuccessResponse,
 } from '@sample/shared';
 
+import AuthBaseApi from './auth-base.api';
+
 import type { ApiResult } from '@/lib/api';
 import { Result } from '@/lib/utils';
-
-import AuthBaseApi from './auth-base.api';
 
 class SignInApi extends AuthBaseApi {
   constructor() {

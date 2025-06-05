@@ -1,5 +1,5 @@
-import { useQueryClient } from '@tanstack/react-query';
 import type { UserDTO } from '@sample/shared';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { AUTH_KEY } from '@/features/auth/hooks';
 

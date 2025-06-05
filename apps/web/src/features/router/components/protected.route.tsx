@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router';
-import { useAuth } from '@/features/auth/hooks/others/use-auth.hook';
+
 import { AppFallback } from '@/components/ui';
+import { useAuth } from '@/features/auth/hooks/others/use-auth.hook';
 
 interface ProtectedRouteProps {
   redirectTo?: string;

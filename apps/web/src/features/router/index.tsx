@@ -1,11 +1,11 @@
 import { type QueryClient, useQueryClient } from '@tanstack/react-query';
-import { RouterProvider, createBrowserRouter } from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router';
+
+import { ProtectedRoute, PublicRoute } from './components';
+import { convert } from './utils';
 
 import { AppLayout } from '@/components/layouts';
 import { AppFallback } from '@/components/ui';
-
-import { convert } from './utils';
-import { ProtectedRoute, PublicRoute } from './components';
 
 const createAppRouter = (queryClient: QueryClient) => {
   return createBrowserRouter([

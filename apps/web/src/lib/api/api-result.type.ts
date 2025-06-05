@@ -3,6 +3,7 @@ import type {
   PaginatedResponse,
   SuccessResponse,
 } from '@sample/shared';
+
 import type { Result } from '@/lib/utils';
 
 export type ApiResult<T> = Result<SuccessResponse<T>, ErrorResponse>;

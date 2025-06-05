@@ -1,9 +1,9 @@
 import type { ErrorResponse, SignUpDTO, SuccessResponse } from '@sample/shared';
 
+import AuthBaseApi from './auth-base.api';
+
 import type { ApiVoidResult } from '@/lib/api';
 import { Result } from '@/lib/utils';
-
-import AuthBaseApi from './auth-base.api';
 
 class SignUpApi extends AuthBaseApi {
   constructor() {

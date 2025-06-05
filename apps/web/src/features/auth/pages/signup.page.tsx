@@ -2,11 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { SignUpDTO } from '@sample/shared';
 import { useForm } from 'react-hook-form';
 
-import { PageLayout } from '@/components/layouts';
-import { Button, Input, Label } from '@/components/ui';
-
 import { useSignUpMutation } from '../hooks/mutations/use-signup.mutation';
 import { signUpSchema } from '../validations/signup.schema';
+
+import { PageLayout } from '@/components/layouts';
+import { Button, Input, Label } from '@/components/ui';
 
 const SignUpPage = () => {
   const { mutate: signUp, isPending } = useSignUpMutation();

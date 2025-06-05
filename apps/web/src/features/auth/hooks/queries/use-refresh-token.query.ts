@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { AUTH_KEY } from '@/features/auth/hooks';
 import { refreshTokenApi } from '@/features/auth/api';
+import { AUTH_KEY } from '@/features/auth/hooks';
 
 export const useRefreshTokenQuery = () => {
   return useQuery({

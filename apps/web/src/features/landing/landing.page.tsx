@@ -2,10 +2,9 @@ import { Link, useNavigate } from 'react-router';
 
 import { PageLayout } from '@/components/layouts';
 import { Button } from '@/components/ui';
-
 import { signOutApi } from '@/features/auth/api';
-import { useTheme } from '@/features/theme/hooks';
 import { useAuth } from '@/features/auth/hooks';
+import { useTheme } from '@/features/theme/hooks';
 
 const LandingPage = () => {
   const { theme, setTheme } = useTheme();

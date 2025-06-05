@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from 'react-router';
+
 import { useAuth } from '@/features/auth/hooks/others/use-auth.hook';
 
 interface PublicRouteProps {

@@ -1,8 +1,9 @@
+import type { SampleDTO } from '@sample/shared';
 import { useForm } from 'react-hook-form';
-import { Button, Input, Label } from '@/components/ui';
+
 import { useCreateSampleMutation } from '../hooks/mutations/use-create-sample.mutation';
 
-import type { SampleDTO } from '@sample/shared';
+import { Button, Input, Label } from '@/components/ui';
 
 const CreateSamplePage = () => {
   const { mutate: createSample, isPending } = useCreateSampleMutation();

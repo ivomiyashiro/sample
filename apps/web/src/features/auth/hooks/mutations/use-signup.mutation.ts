@@ -1,7 +1,7 @@
+import type { SignUpDTO } from '@sample/shared';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { useMutation } from '@tanstack/react-query';
-import type { SignUpDTO } from '@sample/shared';
 
 import { signUpApi } from '@/features/auth/api';
 import { AUTH_KEY } from '@/features/auth/hooks';
