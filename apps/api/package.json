@@ -67,8 +67,7 @@
   },
   "compilerOptions": {
     "types": [
-      "node",
-      "@prisma/client"
+      "node"
     ]
   }
 }

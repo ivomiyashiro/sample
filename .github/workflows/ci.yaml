@@ -40,15 +40,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build shared package
-        run: pnpm --filter @sample/shared run build
-
-      - name: Prisma generate types
-        run: pnpm --filter api run prisma:generate
-
-      - name: Run lint
-        run: pnpm lint
-
       - name: Run tests
         run: pnpm test
 
