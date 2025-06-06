@@ -11,14 +11,14 @@
     "start:debug": "nest start --debug --watch",
     "start:dev": "nest start --watch",
     "start:prod": "node dist/main",
-    "db:generate": "prisma generate --schema=src/core/database/schema.prisma",
-    "db:migrate": "prisma migrate dev --schema=src/core/database/schema.prisma",
-    "db:push": "prisma db push --schema=src/core/database/schema.prisma",
+    "db:generate": "prisma generate --schema=src/common/services/database/schema.prisma",
+    "db:migrate": "prisma migrate dev --schema=src/common/services/database/schema.prisma",
+    "db:push": "prisma db push --schema=src/common/services/database/schema.prisma",
     "db:setup": "pnpm db:migrate && pnpm db:generate",
-    "db:studio": "prisma studio --schema=src/core/database/schema.prisma",
+    "db:studio": "prisma studio --schema=src/common/services/database/schema.prisma",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"{src,apps,libs,test}/**/*.{ts,js,json,md,yml,yaml}\" && prisma format --schema=src/core/database/schema.prisma"
+    "format": "prettier --write \"{src,apps,libs,test}/**/*.{ts,js,json,md,yml,yaml}\" && prisma format --schema=src/common/services/database/schema.prisma"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -67,8 +67,7 @@
   },
   "compilerOptions": {
     "types": [
-      "node",
-      "@prisma/client"
+      "node"
     ]
   }
 }
